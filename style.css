@@ -1,0 +1,28 @@
+
+.calculator {
+    display:flex;
+    flex-direction: column;
+    max-width: 200px;
+    /*height: 100px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 2fr repeat(4, 1fr);
+    grid-template-areas: 
+    "display display display display"
+    "multiply divide add subtract"
+    "one two three decimal"
+    "four five six equal"
+    "seven eight nine clear"; */
+}
+
+.display {
+    border-style: solid;
+    border-color: cadetblue;
+    text-align: right;
+    font-family: Tahoma; 
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
