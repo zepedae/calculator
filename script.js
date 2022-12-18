@@ -1,25 +1,3 @@
-
-// function multiply(a, b){
-//     document.querySelector(".display").textContent = Number(a) * Number(b);
-// }
-
-// function divide(a, b){
-//     document.querySelector(".display").textContent = Number(a)/Number(b);
-// }
-
-// function add(a, b){
-//     displayInner = [Number(a) + Number(b)];
-//     display.textContent = displayInner;
-// }
-
-// function subtract(a, b){
-//     document.querySelector(".display").textContent = Number(a) - Number(b);
-// }
-
-// function round(value, decimals) {
-//     return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
-//   }
-
 function operate(firstOperand, secondOperand, operator){
     let result;
     if(operator === '+'){
@@ -40,6 +18,8 @@ const buttons = document.querySelectorAll('.number,.operator');
 
 const display = document.querySelector('.display');
 
+const clear = document.querySelector('.clear');
+
 const operators = ["+", "-", "÷", "*"];
 
 let firstOperand;
@@ -51,21 +31,31 @@ let operator;
 let displayInner = [];
 
 buttons.forEach(button => button.addEventListener('click', () => {
-    if(operators.includes(button.value)){
+    if(displayInner.length === 0 & operators.includes(button.value) || 
+        operators.includes(operator) & operators.includes(button.value)){
+        return;
+    } else if(operators.includes(button.value)){
         firstOperand = Number(displayInner.join(''));
-        console.log(button.value);
         operator = button.value;
     }
     displayInner.push(button.value);
     display.textContent = displayInner.join('');
 }));
-
-
   
 const enter = document.querySelector('.equal');
 
 enter.addEventListener('click', () => {
-    console.log(typeof operator);
     secondOperand = Number(display.textContent.split(operator)[1]);
-    operate(firstOperand, secondOperand, operator)
+    if(!secondOperand){
+        display.textContent = firstOperand;
+        displayInner.length = 1;
+    } else {
+        operate(firstOperand, secondOperand, operator)
+    }
 });
+
+clear.addEventListener('click', () => window.location.reload());
+
+//fix double operator
+//fix adding numbers after equals
+//round numbers

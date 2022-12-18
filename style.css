@@ -2,27 +2,44 @@
 .calculator {
     display:flex;
     flex-direction: column;
-    max-width: 200px;
-    /*height: 100px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 2fr repeat(4, 1fr);
-    grid-template-areas: 
-    "display display display display"
-    "multiply divide add subtract"
-    "one two three decimal"
-    "four five six equal"
-    "seven eight nine clear"; */
+    align-items: center;
+    max-width: 300px;
+    background-color: bisque;
 }
 
 .display {
     border-style: solid;
-    border-color: cadetblue;
+    border-color: grey;
+    font-size: 40px;
     text-align: right;
     font-family: Tahoma; 
+    height: 50px;
+    width: 90%;
+    background-color: white;
+    margin-top: 25px;
 }
 
 .buttons {
+    width: 90%;
     display: grid;
+    grid-template-rows: repeat(5, 1fr);
     grid-template-columns: repeat(4, 1fr);
+}
+
+button {
+    border-radius: 50%;
+    width: 90%;
+    height: 50px;
+    border: solid;
+    border-color:  gray;
+    margin: 10px;
+}
+
+.clear {
+    grid-column: span 3;
+    border-radius: 25%;
+}
+
+#zero {
+    grid-column: span 2;
 }
