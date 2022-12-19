@@ -10,40 +10,55 @@ function operate(firstOperand, secondOperand, operator){
         result = firstOperand / secondOperand;
     }
 
-    displayInner = [result];
+    displayInner = [result.toFixed(2)];
     display.textContent = displayInner;
+
+    product = true;
+
+    firstOperand = 0;
+    secondOperand = 0;
+    operator = '';
 }
 
-const buttons = document.querySelectorAll('.number,.operator');
-
+const buttons = document.querySelectorAll('.number,.operator,.decimal');
 const display = document.querySelector('.display');
-
 const clear = document.querySelector('.clear');
-
+const enter = document.querySelector('.equal');
 const operators = ["+", "-", "÷", "*"];
 
-let firstOperand;
+let product = false;
 
-let secondOperand;
-
-let operator;
+let firstOperand = 0;
+let secondOperand = 0;
+let operator = '';
 
 let displayInner = [];
 
+
 buttons.forEach(button => button.addEventListener('click', () => {
-    if(displayInner.length === 0 & operators.includes(button.value) || 
-        operators.includes(operator) & operators.includes(button.value)){
-        return;
-    } else if(operators.includes(button.value)){
-        firstOperand = Number(displayInner.join(''));
-        operator = button.value;
+    if(product === true){
+        if(button.className === 'number'){
+            displayInner.length = 0;
+            firstOperand = undefined;
+            secondOperand = undefined;
+            operator = undefined;
+        } else {
+            firstOperand = Number(displayInner.join(''));
+            operator = button.value;
+        }
+        product = false;
+    } else if(product === false && operators.includes(button.value)){
+        if(displayInner.length === 0 || operators.includes(operator)){
+            return;
+        } else {
+            firstOperand = Number(displayInner.join(''));
+            operator = button.value;
+        }
     }
     displayInner.push(button.value);
     display.textContent = displayInner.join('');
 }));
   
-const enter = document.querySelector('.equal');
-
 enter.addEventListener('click', () => {
     secondOperand = Number(display.textContent.split(operator)[1]);
     if(!secondOperand){
@@ -56,6 +71,3 @@ enter.addEventListener('click', () => {
 
 clear.addEventListener('click', () => window.location.reload());
 
-//fix double operator
-//fix adding numbers after equals
-//round numbers
